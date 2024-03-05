@@ -1,4 +1,3 @@
-import benchmark_functions as bf
 import numpy as np
 
 
@@ -50,21 +49,3 @@ class Simplex:
             if np.std([self.func(i) for i in x]) < tol:
                 break
         return x[0]
-
-
-# Functions
-# x0 = [
-#     [0.0, 0.0],
-#     [1.0, 1.0],
-#     [2.0, 2.0],
-# ]
-# f = bf.Ackley(n_dimensions=2)
-# f1 = bf.Hypersphere(n_dimensions=2)
-# f2 = bf.Rastrigin(n_dimensions=2)
-# f3 = bf.Rosenbrock(n_dimensions=2)
-# s = Simplex(f)
-# result = s.optimize(x0)
-# answer = f.minima()
-# print(answer[0])
-# print(f(result), result)
-# f.show(showPoints=[result])

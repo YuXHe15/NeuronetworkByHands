@@ -1,9 +1,12 @@
 import numpy as np
 
+from .BaseOptimizer import BaseOptimizer
+
 
 # Test
-class Simplex:
+class Simplex(BaseOptimizer):
     def __init__(self, func: callable, alpha=1, gamma=2, rho=0.5, sigma=0.5) -> None:
+        super().__init__()
         self.alpha = alpha
         self.gamma = gamma
         self.rho = rho
@@ -42,10 +45,17 @@ class Simplex:
                     x_sorted[i] = x_sorted[0] + self.sigma * (x_sorted[i] - x_sorted[0])
         return x_sorted
 
-    def optimize(self, x0: list, tol=1e-6, max_iter=1000):
+    def optimize(self, x0: list, tol=1e-6, max_iter=1000, trace=False):
         x = x0
+        if trace:
+            trace = [np.array(x[0])]
         for _ in range(max_iter):
             x = self.simplex_worker(x)
+            if trace:
+                trace.append(x[0])
             if np.std([self.func(i) for i in x]) < tol:
                 break
-        return x[0]
+        if not trace:
+            return x[0]
+        else:
+            return trace

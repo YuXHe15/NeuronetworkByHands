@@ -1,15 +1,11 @@
 import benchmark_functions as bf
 import numpy as np
 
-from ..simplex import Simplex
+from ..Optimizers.simplex import Simplex
 
 
 def test_simplex():
-    x0 = [
-        [0.0, 0.0],
-        [1.0, 1.0],
-        [2.0, 2.0],
-    ]
+    x0 = np.random.rand(3, 2)
     f = bf.Ackley(n_dimensions=2)
     f1 = bf.Hypersphere(n_dimensions=2)
     f2 = bf.Rastrigin(n_dimensions=2)
